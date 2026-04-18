@@ -130,6 +130,4 @@ npm run dev
 - Protected routes are enforced in the frontend using `ProtectedRoute` and roles defined in the auth context.
 - The API is mounted under `/api/` and includes auth, departments, feedback, QR, sectors, settings, and admin endpoints.
 
-## License
 
-This project does not include a license file. Add one if you plan to share or distribute the code.
