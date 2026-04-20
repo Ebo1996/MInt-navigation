@@ -2,7 +2,7 @@
 
 A full-stack visitor guidance system with role-based access, QR management, department/sector administration, visitor feedback, and analytics.
 
-## Overview
+## Overview 
 
 This repository contains two main parts:
 
