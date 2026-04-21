@@ -367,10 +367,3 @@ Example:
   "details": null
 }
 ```
-
-## Notes
-
-- Auth-protected routes require a valid JWT in the `Authorization` header.
-- `verifyTokenOptional` routes accept a request without authentication but will attach user data if a valid token is provided.
-- Department and feedback IDs must be valid MongoDB ObjectIds.
-- Admin-only endpoints are guarded by role checks and return `403 Forbidden` for insufficient permissions.
