@@ -1,4 +1,4 @@
-# Smart Visitor Guidance System
+# Smart Visitor Guidance System 
 
 A full-stack visitor guidance system with role-based access, QR management, department/sector administration, visitor feedback, and analytics.
 
