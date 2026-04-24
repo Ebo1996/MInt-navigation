@@ -105,6 +105,40 @@ npm run dev
 - `npm run preview` — preview production build
 - `npm run lint` — run ESLint
 
+## Dependencies
+
+### Backend Dependencies
+
+- `bcryptjs`
+- `cors`
+- `dotenv`
+- `express`
+- `jsonwebtoken`
+- `mongoose`
+
+### Frontend Dependencies
+
+- `axios`
+- `lucide-react`
+- `react`
+- `react-dom`
+- `react-router-dom`
+- `recharts`
+
+### Frontend Dev Dependencies
+
+- `@eslint/js`
+- `@types/react`
+- `@types/react-dom`
+- `@vitejs/plugin-react`
+- `autoprefixer`
+- `eslint`
+- `eslint-plugin-react-hooks`
+- `eslint-plugin-react-refresh`
+- `globals`
+- `postcss`
+- `tailwindcss`
+- `vite`
 ## Folder Structure
 
 - `backend/`
@@ -129,5 +163,6 @@ npm run dev
 - The backend expects the frontend to use `http://localhost:5173` by default via CORS.
 - Protected routes are enforced in the frontend using `ProtectedRoute` and roles defined in the auth context.
 - The API is mounted under `/api/` and includes auth, departments, feedback, QR, sectors, settings, and admin endpoints.
+
 
 
