@@ -1,26 +1,65 @@
-import api from "../api/api";
-
-export const submitFeedback = async (payload) => {
-  const response = await api.post("/feedback", payload);
-  return response.data?.feedback;
-};
-
-export const getDepartmentFeedback = async (departmentId) => {
-  const response = await api.get(`/feedback/department/${departmentId}`);
-  return response.data?.feedback || [];
-};
-
-export const getAllFeedback = async () => {
-  const response = await api.get("/feedback/all");
-  return response.data?.feedback || [];
-};
-
-export const respondToFeedback = async (id, responseText) => {
-  const response = await api.put(`/feedback/respond/${id}`, { response: responseText });
-  return response.data?.feedback;
-};
-
-export const getFeedbackAnalyticsSummary = async () => {
-  const response = await api.get("/feedback/analytics/summary");
-  return response.data?.analytics;
+import API from "./api";
+export const feedbackService = {
+  // Get all feedback with optional filters
+  getAll: async (params = {}) => {
+    try {
+      const { data } = await API.get("/feedback", { params });
+      return data;
+    } catch (error) {
+      console.error("Error fetching feedback:", error);
+      throw error;
+    }
+  },
+  // Get feedback by department
+  getByDepartment: async (deptId) => {
+    try {
+      const { data } = await API.get("/feedback", {
+        params: { department: deptId },
+      });
+      return data;
+    } catch (error) {
+      console.error("Error fetching department feedback:", error);
+      throw error;
+    }
+  },
+  // Get feedback statistics
+  getStats: async () => {
+    try {
+      const { data } = await API.get("/feedback/stats");
+      return data;
+    } catch (error) {
+      console.error("Error fetching feedback stats:", error);
+      throw error;
+    }
+  },
+  // Submit new feedback
+  create: async (feedbackData) => {
+    try {
+      const { data } = await API.post("/feedback", feedbackData);
+      return data;
+    } catch (error) {
+      console.error("Error submitting feedback:", error);
+      throw error;
+    }
+  },
+  // Respond to feedback (admin only)
+  respond: async (id, response) => {
+    try {
+      const { data } = await API.put(`/feedback/${id}/respond`, { response });
+      return data;
+    } catch (error) {
+      console.error("Error responding to feedback:", error);
+      throw error;
+    }
+  },
+  // Delete feedback (admin only)
+  delete: async (id) => {
+    try {
+      const { data } = await API.delete(`/feedback/${id}`);
+      return data;
+    } catch (error) {
+      console.error("Error deleting feedback:", error);
+      throw error;
+    }
+  },
 };

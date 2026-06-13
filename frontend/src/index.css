@@ -4,42 +4,49 @@
 
 body {
   margin: 0;
-  min-height: 100vh;
-  font-family: "Trebuchet MS", "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-  color: #083729;
+  font-family:
+    -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu",
+    "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
-* {
+html,
+body,
+#root {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+*,
+*::before,
+*::after {
   box-sizing: border-box;
 }
 
-.fade-in {
-  animation: fadeIn 500ms ease both;
+img,
+svg,
+video,
+canvas,
+iframe {
+  max-width: 100%;
+  height: auto;
 }
 
-.animate-search {
-  animation: breathe 2.5s ease-in-out infinite;
-}
-
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(8px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
+@media (max-width: 768px) {
+  input,
+  select,
+  textarea,
+  button {
+    font-size: 16px;
   }
 }
 
-@keyframes breathe {
-  0% {
-    box-shadow: 0 0 0 rgba(23, 201, 150, 0);
-  }
-  50% {
-    box-shadow: 0 0 0 8px rgba(23, 201, 150, 0.08);
-  }
-  100% {
-    box-shadow: 0 0 0 rgba(23, 201, 150, 0);
-  }
+/* ── Print styles for Report Generator ── */
+@media print {
+  body * { visibility: hidden; }
+  .print-area, .print-area * { visibility: visible; }
+  .print-area { position: fixed; top: 0; left: 0; width: 100%; background: white; padding: 32px; }
+  button, nav, header, aside { display: none !important; }
 }
