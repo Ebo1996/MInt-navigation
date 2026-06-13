@@ -21,7 +21,8 @@ const departmentSchema = new mongoose.Schema(
     floor: {
       type: Number,
       required: true,
-      min: 1
+      min: 0,
+      max: 8
     },
     officeNumber: {
       type: String,
