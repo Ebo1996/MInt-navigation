@@ -45,6 +45,7 @@ import hero2 from "../images/hero2.jpg";
 import hero3 from "../images/hero3.jpg";
 import hero4 from "../images/hero4.jpg";
 import hero5 from "../images/hero5.jpg";
+import defaultManagerImg from "../profile image/abebe.jfif";
 
 /* ── 5 cinematic hero slides ── */
 const HERO_SLIDES = [
@@ -842,25 +843,28 @@ const Home = () => {
               </div>
             ) : (
               <>
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5" style={{ alignItems: "stretch" }}>
                   {visibleDesks.map((dept, idx) => {
                     const deptName = dept.name?.[language] || dept.name?.en || dept.name || "";
-                    const headName = dept.headName || dept.head?.name || "";
-                    const floor    = dept.floor ? `${language === "am" ? "ፎቅ" : "Floor"} ${dept.floor}` : "";
+                    const headName = dept.headName || dept.head?.name || dept.head || "";
+                    const floor    = dept.floor != null ? `${language === "am" ? "ፎቅ" : "Floor"} ${dept.floor}` : "";
                     const building = dept.building ? `${t("bldg")} ${dept.building}` : "";
+                    const managerImg = dept.headImage || defaultManagerImg;
                     return (
                       <motion.div key={dept.id}
                         initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.35, delay: idx * 0.07 }}
-                        whileHover={{ y: -4, transition: { duration: 0.18 } }}>
-                        <Link to={`/department/${dept.id}`} style={{ textDecoration: "none", display: "block" }}>
-                          <div className="rounded-2xl overflow-hidden group cursor-pointer"
-                            style={{ background: T.card, border: `1px solid ${T.border}`,
+                        whileHover={{ y: -4, transition: { duration: 0.18 } }}
+                        style={{ display: "flex" }}>
+                        <Link to={`/department/${dept.id}`} style={{ textDecoration: "none", display: "flex", width: "100%" }}>
+                          <div className="rounded-2xl overflow-hidden group cursor-pointer flex flex-col w-full"
+                            style={{ background: T.card, border: `1px solid ${T.border}`, minHeight: 260,
                               boxShadow: "0 2px 12px rgba(0,118,135,0.07)", transition: "box-shadow 0.2s, border-color 0.2s" }}
                             onMouseEnter={e => { e.currentTarget.style.boxShadow = "0 16px 40px rgba(0,118,135,0.16)"; e.currentTarget.style.borderColor = T.navy; }}
                             onMouseLeave={e => { e.currentTarget.style.boxShadow = "0 2px 12px rgba(0,118,135,0.07)"; e.currentTarget.style.borderColor = T.border; }}>
-                            {/* Top accent + "Most visited" badge */}
-                            <div className="flex items-center justify-between px-4 pt-3 pb-1">
+
+                            {/* Top bar: badge + stars */}
+                            <div className="flex items-center justify-between px-4 pt-3 pb-2">
                               <span className="text-xs font-black uppercase px-2.5 py-1 rounded-full"
                                 style={{ background: `rgba(0,118,135,0.09)`, color: T.navy, letterSpacing: "0.10em" }}>
                                 {t("most_visited")}
@@ -871,25 +875,37 @@ const Home = () => {
                                 ))}
                               </div>
                             </div>
-                            <div className="p-4 pt-2">
-                              {/* Avatar placeholder */}
-                              <div className="w-14 h-14 rounded-full mb-3 flex items-center justify-center"
-                                style={{ background: `linear-gradient(135deg, ${T.navy}, ${T.navyLight})`, border: `3px solid ${T.border}` }}>
-                                {dept.headImage ? (
-                                  <img src={dept.headImage} alt={headName}
-                                    className="w-full h-full rounded-full object-cover object-top"
-                                    onError={e => { e.target.style.display = "none"; }} />
-                                ) : (
-                                  <FiUsers size={22} color="rgba(255,255,255,0.7)" />
-                                )}
+
+                            <div className="px-4 pb-4 flex flex-col flex-1">
+                              {/* Manager row: profile image top-left + name */}
+                              <div className="flex items-center gap-3 mb-3 p-2.5 rounded-xl"
+                                style={{ background: `rgba(0,118,135,0.05)`, border: `1px solid ${T.border}` }}>
+                                <img
+                                  src={managerImg}
+                                  alt={headName || "Manager"}
+                                  className="rounded-full object-cover object-top flex-shrink-0"
+                                  style={{ width: 44, height: 44, border: `2.5px solid ${T.navy}` }}
+                                  onError={e => { e.target.src = defaultManagerImg; }}
+                                />
+                                <div className="min-w-0">
+                                  <div className="text-xs font-semibold truncate"
+                                    style={{ color: T.textMuted, lineHeight: 1.2 }}>
+                                    {language === "am" ? "ኃላፊ" : "Manager"}
+                                  </div>
+                                  <div className="text-xs font-bold truncate"
+                                    style={{ color: T.text, lineHeight: 1.3 }}>
+                                    {headName || (language === "am" ? "አልተመደበም" : "Not assigned")}
+                                  </div>
+                                </div>
                               </div>
-                              <h3 className="font-extrabold text-sm leading-snug mb-1" style={{ color: T.text }}>{deptName}</h3>
-                              {headName && (
-                                <p className="text-xs font-semibold mb-2" style={{ color: T.textSub }}>
-                                  <span style={{ color: T.textMuted }}>{t("manager_head")}</span><br />{headName}
-                                </p>
-                              )}
-                              <div className="flex items-center gap-2 flex-wrap mt-2">
+
+                              {/* Department name */}
+                              <h3 className="font-extrabold text-sm leading-snug mb-2 flex-1" style={{ color: T.text }}>
+                                {deptName}
+                              </h3>
+
+                              {/* Location badges */}
+                              <div className="flex items-center gap-2 flex-wrap mb-3">
                                 {building && (
                                   <span className="text-xs px-2.5 py-1 rounded-full font-semibold"
                                     style={{ background: `rgba(0,118,135,0.08)`, color: T.navy }}>
@@ -901,7 +917,9 @@ const Home = () => {
                                     style={{ background: `rgba(200,150,30,0.10)`, color: T.gold }}>{floor}</span>
                                 )}
                               </div>
-                              <div className="mt-3 flex items-center gap-1.5 text-xs font-black uppercase"
+
+                              {/* CTA */}
+                              <div className="flex items-center gap-1.5 text-xs font-black uppercase mt-auto"
                                 style={{ color: T.navy, letterSpacing: "0.08em" }}>
                                 {t("view_desk")} <FiArrowRight size={12} />
                               </div>
