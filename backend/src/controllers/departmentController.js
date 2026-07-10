@@ -37,11 +37,8 @@ const normalizeServices = (services, fallback = { en: [], am: [], om: [] }) => {
 
 const buildFileUrl = (req, file) => {
   if (!file) return null;
-  const normalizedPath = file.path.replace(/\\/g, "/");
-  const uploadIndex = normalizedPath.indexOf("/uploads/");
-  const relativeUploadPath =
-    uploadIndex >= 0 ? normalizedPath.slice(uploadIndex) : `/uploads/${file.filename}`;
-  return `${req.protocol}://${req.get("host")}${relativeUploadPath}`;
+  // Cloudinary returns the full https URL in file.path
+  return file.path || null;
 };
 // ============= PUBLIC ROUTES =============
 // @desc    Get all departments

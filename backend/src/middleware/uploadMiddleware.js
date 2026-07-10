@@ -1,27 +1,16 @@
-const fs = require("fs");
-const path = require("path");
 const multer = require("multer");
+const { CloudinaryStorage } = require("multer-storage-cloudinary");
+const cloudinary = require("../utils/cloudinary");
 
-const uploadsRoot = path.join(__dirname, "../../uploads");
-const departmentsDir = path.join(uploadsRoot, "departments");
-
-if (!fs.existsSync(departmentsDir)) {
-  fs.mkdirSync(departmentsDir, { recursive: true });
-}
-
-const storage = multer.diskStorage({
-  destination: (req, file, cb) => {
-    cb(null, departmentsDir);
-  },
-  filename: (req, file, cb) => {
-    const ext = path.extname(file.originalname || "").toLowerCase();
-    const safeExt = ext || ".jpg";
-    const baseName = path
-      .basename(file.originalname || "file", ext)
-      .replace(/[^a-zA-Z0-9-_]/g, "-")
-      .toLowerCase();
-    cb(null, `${baseName}-${Date.now()}${safeExt}`);
-  },
+// ── Department images storage ──
+const departmentStorage = new CloudinaryStorage({
+  cloudinary,
+  params: async (req, file) => ({
+    folder: "mint/departments",
+    allowed_formats: ["jpg", "jpeg", "png", "webp"],
+    transformation: [{ width: 800, height: 600, crop: "limit", quality: "auto" }],
+    public_id: `dept-${Date.now()}-${Math.round(Math.random() * 1e6)}`,
+  }),
 });
 
 const fileFilter = (req, file, cb) => {
@@ -32,16 +21,12 @@ const fileFilter = (req, file, cb) => {
 };
 
 const uploadDepartmentImages = multer({
-  storage,
-  limits: {
-    fileSize: 5 * 1024 * 1024,
-  },
+  storage: departmentStorage,
+  limits: { fileSize: 5 * 1024 * 1024 },
   fileFilter,
 }).fields([
   { name: "departmentImage", maxCount: 1 },
-  { name: "headImage", maxCount: 1 },
+  { name: "headImage",       maxCount: 1 },
 ]);
 
-module.exports = {
-  uploadDepartmentImages,
-};
+module.exports = { uploadDepartmentImages };
