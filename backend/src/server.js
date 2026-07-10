@@ -66,6 +66,7 @@ app.use(
       "http://127.0.0.1:5173",
       "http://127.0.0.1:5174",
       "https://mintnavigation1.netlify.app",
+      "https://mint-navigation-u0hc.onrender.com",
     ],
     methods: ["GET", "POST", "PUT", "DELETE", "PATCH"],
     credentials: true,
