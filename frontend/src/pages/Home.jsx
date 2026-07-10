@@ -40,13 +40,19 @@ const T = {
 const typeIcon = (type) =>
   ({ info:"INFO", warning:"WARN", urgent:"URGENT", event:"EVENT", maintenance:"MAINT" })[type] ?? "NOTICE";
 
-/* ── 4 cinematic hero slides ── */
+import hero1 from "../images/hero1.jpg";
+import hero2 from "../images/hero2.jpg";
+import hero3 from "../images/hero3.jpg";
+import hero4 from "../images/hero4.jpg";
+import hero5 from "../images/hero5.jpg";
+
+/* ── 5 cinematic hero slides ── */
 const HERO_SLIDES = [
-  { bg: "http://www.mint.gov.et/documents/d/guest/1-38-jpg?imagePreview=1",         slideKey: "nav"      },
-  { bg: "http://www.mint.gov.et/documents/d/guest/wic-jpg?imagePreview=1",           slideKey: "sectors"  },
-  { bg: "http://www.mint.gov.et/documents/d/guest/iac-picture-jpg?imagePreview=1",   slideKey: "feedback" },
-  { bg: "http://www.mint.gov.et/documents/20117/0/1+%2820%29.jpg/6210604d-b36e-5d04-3483-137fa7f256c5?version=1.0&t=1737979615080&imagePreview=1", slideKey: "about" },
-  { bg: "http://www.mint.gov.et/documents/d/guest/bel3-1-jpg?imagePreview=1",        slideKey: "bel3"     },
+  { bg: hero1, slideKey: "nav"      },
+  { bg: hero2, slideKey: "sectors"  },
+  { bg: hero3, slideKey: "feedback" },
+  { bg: hero4, slideKey: "about"    },
+  { bg: hero5, slideKey: "bel3"     },
 ];
 const SLIDE_MS = 5000;
 
