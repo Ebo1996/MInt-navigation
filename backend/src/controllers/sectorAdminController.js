@@ -2,23 +2,33 @@ const Sector = require("../models/Sector");
 const Department = require("../models/Department");
 const Feedback = require("../models/Feedback");
 const multer = require("multer");
-const { CloudinaryStorage } = require("multer-storage-cloudinary");
-const cloudinary = require("../utils/cloudinary");
+const path = require("path");
+const fs = require("fs");
 
-// ── Sector images → Cloudinary ──
-const sectorStorage = new CloudinaryStorage({
-  cloudinary,
-  params: async (req, file) => ({
-    folder: "mint/sectors",
-    allowed_formats: ["jpg", "jpeg", "png", "webp"],
-    transformation: [{ width: 1200, height: 630, crop: "limit", quality: "auto" }],
-    public_id: `sector-${Date.now()}-${Math.round(Math.random() * 1e6)}`,
-  }),
+// Ensure uploads directory exists
+const uploadDir = path.join(__dirname, "../../uploads/sectors");
+if (!fs.existsSync(uploadDir)) {
+  fs.mkdirSync(uploadDir, { recursive: true });
+}
+
+// Multer configuration for file upload
+const storage = multer.diskStorage({
+  destination: (req, file, cb) => {
+    cb(null, uploadDir);
+  },
+  filename: (req, file, cb) => {
+    const uniqueSuffix = Date.now() + "-" + Math.round(Math.random() * 1e9);
+    cb(null, uniqueSuffix + path.extname(file.originalname));
+  },
 });
 
 const fileFilter = (req, file, cb) => {
   const allowedTypes = /jpeg|jpg|png|gif|webp/;
-  if (allowedTypes.test(file.mimetype)) {
+  const extname = allowedTypes.test(
+    path.extname(file.originalname).toLowerCase(),
+  );
+  const mimetype = allowedTypes.test(file.mimetype);
+  if (extname && mimetype) {
     cb(null, true);
   } else {
     cb(new Error("Only image files are allowed"));
@@ -26,8 +36,8 @@ const fileFilter = (req, file, cb) => {
 };
 
 const upload = multer({
-  storage: sectorStorage,
-  limits: { fileSize: 5 * 1024 * 1024 },
+  storage,
+  limits: { fileSize: 5 * 1024 * 1024 }, // 5MB limit
   fileFilter,
 });
 
@@ -229,9 +239,9 @@ const createSector = async (req, res) => {
       });
     }
 
-    // Handle file upload — Cloudinary returns full URL in req.file.path
+    // Handle file upload
     if (req.file) {
-      image = req.file.path;
+      image = `/uploads/sectors/${req.file.filename}`;
     }
 
     // Check if sector with same name exists
@@ -303,9 +313,8 @@ const updateSector = async (req, res) => {
       return res.status(404).json({ message: "Sector not found" });
     }
 
-    // Handle file upload — Cloudinary returns full URL in req.file.path
     if (req.file) {
-      image = req.file.path;
+      image = `/uploads/sectors/${req.file.filename}`;
     }
 
     if (name && name !== sector.name) {
