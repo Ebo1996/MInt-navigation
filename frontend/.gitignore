@@ -11,6 +11,8 @@ node_modules
 dist
 dist-ssr
 *.local
+# Keep .env.production committed (contains only public API URL, no secrets)
+!.env.production
 
 # Editor directories and files
 .vscode/*
