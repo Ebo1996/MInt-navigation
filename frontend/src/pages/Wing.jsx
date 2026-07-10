@@ -146,7 +146,7 @@ export default function Wing() {
           ) : (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
               {desks.map((desk, idx) => {
-                const floorLabel = desk.floor != null ? getFloorLabel(desk.floor) : "TBD";
+                const floorLabel = desk.floor != null ? getFloorLabel(desk.floor, language) : t("tbd_floor");
                 const hasHead    = desk.head && desk.head !== "TBD" && desk.head !== "";
                 const hasLocation = desk.room && desk.room !== "TBD";
                 return (

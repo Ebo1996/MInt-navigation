@@ -357,7 +357,7 @@ const DepartmentDetail = () => {
                       style={{ background:"rgba(200,150,30,0.06)", borderTop:`1px solid rgba(200,150,30,0.18)` }}>
                       <FiClock size={13} style={{ color:T.gold }} />
                       <span className="text-xs font-semibold" style={{ color:T.textSub }}>
-                        {t("walk_time")}: <strong style={{ color:T.text }}>{department.walkingTime||"3–5 minutes"}</strong>
+                        {t("walk_time")}: <strong style={{ color:T.text }}>{department.walkingTime || t("walk_default")}</strong>
                       </span>
                     </div>
                   </div>

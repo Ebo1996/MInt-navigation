@@ -70,7 +70,7 @@ export default function Sector() {
         setTotalDesks(depts.length);
         const map = {};
         for (const d of depts) {
-          const w = d.wing || "General";
+          const w = d.wing || t("general_wing");
           if (!map[w]) map[w] = { name: w, deskCount: 0, buildings: new Set() };
           map[w].deskCount++;
           if (d.building) map[w].buildings.add(d.building);

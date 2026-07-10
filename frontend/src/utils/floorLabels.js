@@ -1,10 +1,15 @@
 /**
  * Consistent floor copy site-wide.
  * @param {number} floor
+ * @param {string} [lang="en"]
  * @returns {string}
  */
-export function getFloorLabel(floor) {
+export function getFloorLabel(floor, lang = "en") {
   const f = Number(floor);
+  if (lang === "am") {
+    if (f === 0) return "የታችኛው ፎቅ";
+    return `ፎቅ ${f}`;
+  }
   if (f === 0) return "Ground floor";
   return `Floor ${f}`;
 }

@@ -299,7 +299,7 @@ export default function Sectors() {
                     {t("need_guidance")}
                   </h3>
                   <p className="text-sm" style={{ color:"rgba(255,255,255,0.50)" }}>
-                    {t("guidance_sub")} A {t("or_building_b", undefined) || "or Building B"}.
+                    {t("guidance_sub")} A {t("or_building_b")}.
                   </p>
                 </div>
                 <div className="flex gap-3 flex-shrink-0">
