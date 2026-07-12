@@ -90,10 +90,10 @@ const StatItem = ({ value, suffix = "+", label }) => {
   const [count, ref] = useCountUp(value);
   return (
     <div ref={ref} className="text-center">
-      <div className="text-4xl md:text-5xl font-black mb-2" style={{ color: T.goldLight }}>
+      <div className="text-3xl sm:text-4xl md:text-5xl font-black mb-1 sm:mb-2" style={{ color: T.goldLight }}>
         {count}{suffix}
       </div>
-      <div className="text-sm font-semibold uppercase" style={{ color: "rgba(255,255,255,0.55)", letterSpacing: "0.10em" }}>
+      <div className="text-xs sm:text-sm font-semibold uppercase" style={{ color: "rgba(255,255,255,0.55)", letterSpacing: "0.10em" }}>
         {label}
       </div>
     </div>
@@ -254,7 +254,7 @@ const Home = () => {
               exit={{ opacity: 0, height: 0, overflow: "hidden" }} transition={{ duration: 0.3 }}
               style={{ background: "#FFF8E6", borderBottom: "2px solid #E8A800", padding: "9px 0" }}
             >
-              <div className="max-w-6xl mx-auto px-4">
+              <div className="max-w-6xl mx-auto px-3 sm:px-4">
                 <div className="flex items-center gap-3 overflow-x-auto" style={{ scrollbarWidth: "none" }}>
                   <div className="flex items-center gap-1.5 px-3 py-1 rounded-full flex-shrink-0 text-xs font-extrabold uppercase"
                     style={{ background: "#E8A800", color: "#5A3A00", letterSpacing: "0.08em" }}>
@@ -287,7 +287,7 @@ const Home = () => {
         {/* ══════════════════════════════════════════
             HERO SECTION
         ══════════════════════════════════════════ */}
-        <div className="relative overflow-hidden" style={{ minHeight: "100vh", maxHeight: "100vh" }}>
+        <div className="relative overflow-hidden" style={{ minHeight: "100svh" }}>
           {HERO_SLIDES.map((slide, i) => (
             <div key={slide.bg} className="absolute inset-0 bg-cover bg-center pointer-events-none"
               style={{
@@ -303,10 +303,10 @@ const Home = () => {
           <div className="absolute inset-0 pointer-events-none"
             style={{ background: "radial-gradient(ellipse at 30% 50%, rgba(200,150,30,0.06) 0%, transparent 65%)" }} />
 
-          <div className="relative z-10 h-full flex flex-col" style={{ minHeight: "100vh" }}>
+          <div className="relative z-10 flex flex-col" style={{ minHeight: "100svh" }}>
             <div className="hidden md:block" style={{ height: 40 }} />
-            <div className="block md:hidden" style={{ height: 70 }} />
-            <div className="flex-1 flex items-center">
+            <div className="block md:hidden" style={{ height: 64 }} />
+            <div className="flex-1 flex items-center py-8 sm:py-10 lg:py-0">
               <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 md:px-10">
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
 
@@ -317,18 +317,18 @@ const Home = () => {
                       MINT NAVIGATOR
                     </div>
                     <h1 className="font-black leading-none mb-1 md:mb-2 uppercase"
-                      style={{ fontSize: "clamp(2rem, 8vw, 5.5rem)", color: "#FFFFFF", letterSpacing: "-0.02em",
-                        textShadow: "0 4px 32px rgba(0,0,0,0.70)", lineHeight: 1.0 }}>
+                      style={{ fontSize: "clamp(1.9rem, 9vw, 5.5rem)", color: "#FFFFFF", letterSpacing: "-0.02em",
+                        textShadow: "0 4px 32px rgba(0,0,0,0.70)", lineHeight: 1.05 }}>
                       {t("hero_where")}
                     </h1>
                     <h1 className="font-black leading-none mb-1 md:mb-2 uppercase"
-                      style={{ fontSize: "clamp(2rem, 8vw, 5.5rem)", color: "#E8B84B", letterSpacing: "-0.02em",
-                        textShadow: "0 4px 32px rgba(200,150,30,0.50)", lineHeight: 1.0 }}>
+                      style={{ fontSize: "clamp(1.9rem, 9vw, 5.5rem)", color: "#E8B84B", letterSpacing: "-0.02em",
+                        textShadow: "0 4px 32px rgba(200,150,30,0.50)", lineHeight: 1.05 }}>
                       {t("hero_would_you")}
                     </h1>
                     <h1 className="font-black leading-none mb-4 md:mb-6 uppercase"
-                      style={{ fontSize: "clamp(2rem, 8vw, 5.5rem)", color: "#FFFFFF", letterSpacing: "-0.02em",
-                        textShadow: "0 4px 32px rgba(0,0,0,0.70)", lineHeight: 1.0 }}>
+                      style={{ fontSize: "clamp(1.9rem, 9vw, 5.5rem)", color: "#FFFFFF", letterSpacing: "-0.02em",
+                        textShadow: "0 4px 32px rgba(0,0,0,0.70)", lineHeight: 1.05 }}>
                       {t("hero_like_to_go")}
                     </h1>
                     <div className="w-16 h-1 rounded-full mb-4 md:mb-5"
@@ -356,7 +356,7 @@ const Home = () => {
                     </div>
                   </div>
 
-                  {/* HERO RIGHT — smart search */}
+                  {/* HERO RIGHT — smart search (desktop/tablet only) */}
                   <div className="hidden lg:flex flex-col justify-center" style={{ minHeight: 460 }}>
                     <div className="mb-4">
                       <div className="text-xs font-black uppercase mb-2" style={{ color: "#E8B84B", letterSpacing: "0.22em" }}>
@@ -471,12 +471,66 @@ const Home = () => {
                       )}
                     </div>
                   </div>
+
+                  {/* MOBILE / TABLET — compact search bar (shown below lg) */}
+                  <div className="lg:hidden">
+                    <div ref={heroSearchRef} className="relative">
+                      <div className="flex items-center gap-2.5 px-3.5 py-3 rounded-2xl"
+                        style={{ background: "rgba(255,255,255,0.14)", border: "1.5px solid rgba(232,184,75,0.50)", backdropFilter: "blur(16px)" }}>
+                        <FiSearch size={17} style={{ color: "#E8B84B", flexShrink: 0 }} />
+                        <input
+                          type="text"
+                          value={heroSearch}
+                          onChange={e => setHeroSearch(e.target.value)}
+                          onFocus={() => heroSearch.trim().length >= 2 && setShowHeroRes(true)}
+                          placeholder={language === "am" ? "ፈልግ…" : "Search departments, offices…"}
+                          className="flex-1 bg-transparent outline-none text-sm font-medium text-white placeholder-white"
+                          style={{ color: "#fff", fontSize: 14, minWidth: 0 }}
+                        />
+                        {heroSearch && (
+                          <button onClick={() => { setHeroSearch(""); setHeroResults([]); setShowHeroRes(false); }}
+                            style={{ background: "none", border: "none", cursor: "pointer", color: "rgba(255,255,255,0.55)", padding: 0 }}>
+                            <FiX size={15} />
+                          </button>
+                        )}
+                      </div>
+
+                      {showHeroRes && heroResults.length > 0 && (
+                        <div className="absolute left-0 right-0 mt-2 rounded-2xl overflow-hidden z-50"
+                          style={{ background: "#fff", boxShadow: "0 24px 60px rgba(0,0,0,0.30)", border: `1.5px solid ${T.border}` }}>
+                          <div className="px-4 py-2 flex items-center justify-between"
+                            style={{ borderBottom: `1px solid ${T.border}`, background: T.surface }}>
+                            <span className="text-xs font-black uppercase" style={{ color: T.textMuted, letterSpacing: "0.12em" }}>
+                              {heroResults.length} {language === "am" ? "ውጤቶች" : "results"}
+                            </span>
+                          </div>
+                          <div style={{ maxHeight: 240, overflowY: "auto" }}>
+                            {heroResults.map((dept) => {
+                              const name = dept.name?.[language] || dept.name?.en || dept.name || "";
+                              const head = dept.headName || dept.head?.name || dept.head || "";
+                              return (
+                                <Link key={dept.id}
+                                  to={`/department/${dept.id}`}
+                                  onClick={() => setShowHeroRes(false)}
+                                  style={{ textDecoration: "none", display: "block" }}>
+                                  <div className="px-4 py-2.5" style={{ borderBottom: `1px solid ${T.border}` }}>
+                                    <div className="font-bold text-sm truncate" style={{ color: T.text }}>{name}</div>
+                                    {head && <div className="text-xs mt-0.5 truncate" style={{ color: T.textSub }}>{head}</div>}
+                                  </div>
+                                </Link>
+                              );
+                            })}
+                          </div>
+                        </div>
+                      )}
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
 
             {/* Hero bottom controls */}
-            <div className="relative z-20 flex items-center justify-between px-8 md:px-12 pb-6">
+            <div className="relative z-20 flex items-center justify-between px-4 sm:px-6 md:px-12 pb-5 sm:pb-6">
               <div className="text-xs font-black" style={{ color: "rgba(255,255,255,0.35)", letterSpacing: "0.14em" }}>
                 0{slideIndex + 1} / 0{HERO_SLIDES.length}
               </div>
@@ -500,26 +554,26 @@ const Home = () => {
         {/* ══════════════════════════════════════════
             OFFICE LOCATOR
         ══════════════════════════════════════════ */}
-        <section style={{ background: `linear-gradient(160deg, ${T.text} 0%, ${T.navy} 55%, ${T.navyLight} 100%)` }} className="py-16">
+        <section style={{ background: `linear-gradient(160deg, ${T.text} 0%, ${T.navy} 55%, ${T.navyLight} 100%)` }} className="py-12 sm:py-16">
           <div className="max-w-6xl mx-auto px-4 sm:px-6">
-            <div className="text-center mb-10">
+            <div className="text-center mb-8 sm:mb-10">
               <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-bold uppercase mb-3"
                 style={{ background: "rgba(232,184,75,0.15)", border: "1px solid rgba(232,184,75,0.35)", color: "#E8B84B", letterSpacing: "0.12em" }}>
                 {language === "am" ? "ቢሮ መፈለጊያ" : "OFFICE LOCATOR"}
               </div>
-              <h2 className="text-2xl md:text-3xl font-black text-white mb-2">
+              <h2 className="text-xl sm:text-2xl md:text-3xl font-black text-white mb-2">
                 {language === "am" ? "ቢሮ ያግኙ" : "Find an Office"}
               </h2>
-              <p className="text-sm" style={{ color: "rgba(255,255,255,0.60)" }}>
+              <p className="text-sm px-2" style={{ color: "rgba(255,255,255,0.60)" }}>
                 {language === "am"
                   ? "ህንፃ ይምረጡ — ሁሉም ጠረጴዛ እና ሥራ አስፈጻሚ ቢሮ ይታያል"
                   : "Choose a building to see every desk and executive office, grouped floor by floor."}
               </p>
             </div>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-3xl mx-auto">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-5 sm:gap-6 max-w-3xl mx-auto">
               {/* Building A */}
               <motion.div initial={{ opacity:0, y:24 }} whileInView={{ opacity:1, y:0 }} viewport={{ once:true }} transition={{ duration:0.5 }}>
-                <div className="rounded-2xl p-8 text-center cursor-pointer relative overflow-hidden"
+                <div className="rounded-2xl p-6 sm:p-8 text-center cursor-pointer relative overflow-hidden"
                   style={{ background: buildingFilter === "A"
                       ? "linear-gradient(135deg, rgba(232,184,75,0.30) 0%, rgba(232,184,75,0.12) 100%)"
                       : "linear-gradient(135deg, rgba(255,255,255,0.10) 0%, rgba(255,255,255,0.05) 100%)",
@@ -538,25 +592,25 @@ const Home = () => {
                     <div className="absolute inset-0 rounded-2xl pointer-events-none"
                       style={{ boxShadow: "inset 0 0 0 2px rgba(232,184,75,0.50)" }} />
                   )}
-                  <div className="w-16 h-16 rounded-2xl flex items-center justify-center mx-auto mb-5"
+                  <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-2xl flex items-center justify-center mx-auto mb-4 sm:mb-5"
                     style={{ background: buildingFilter === "A" ? "rgba(232,184,75,0.30)" : "rgba(232,184,75,0.15)",
                       border: `1.5px solid rgba(232,184,75,${buildingFilter === "A" ? "0.60" : "0.35"})` }}>
-                    <FiGrid size={26} style={{ color: "#E8B84B" }} />
+                    <FiGrid size={24} style={{ color: "#E8B84B" }} />
                   </div>
                   <div className="text-xs font-black uppercase tracking-widest mb-1" style={{ color: "rgba(232,184,75,0.70)", letterSpacing: "0.20em" }}>
                     {language === "am" ? "ዋና ህንፃ" : "MAIN BUILDING"}
                   </div>
-                  <h3 className="text-2xl font-black text-white mb-2">
+                  <h3 className="text-xl sm:text-2xl font-black text-white mb-2">
                     {language === "am" ? "ህንፃ A" : "Building A"}
                   </h3>
-                  <div className="flex items-center justify-center gap-4 mb-6">
+                  <div className="flex items-center justify-center gap-4 mb-5 sm:mb-6">
                     <div className="flex flex-col items-center">
-                      <span className="text-xl font-black" style={{ color: "#E8B84B" }}>{blockACount}</span>
+                      <span className="text-lg sm:text-xl font-black" style={{ color: "#E8B84B" }}>{blockACount}</span>
                       <span className="text-xs" style={{ color: "rgba(255,255,255,0.50)" }}>{language === "am" ? "ቢሮዎች" : "Offices"}</span>
                     </div>
                     <div className="w-px h-8" style={{ background: "rgba(255,255,255,0.15)" }} />
                     <div className="flex flex-col items-center">
-                      <span className="text-xl font-black" style={{ color: "#E8B84B" }}>7</span>
+                      <span className="text-lg sm:text-xl font-black" style={{ color: "#E8B84B" }}>7</span>
                       <span className="text-xs" style={{ color: "rgba(255,255,255,0.50)" }}>{language === "am" ? "ፎቆች" : "Floors"}</span>
                     </div>
                   </div>
@@ -574,7 +628,7 @@ const Home = () => {
 
               {/* Building B */}
               <motion.div initial={{ opacity:0, y:24 }} whileInView={{ opacity:1, y:0 }} viewport={{ once:true }} transition={{ duration:0.5, delay:0.1 }}>
-                <div className="rounded-2xl p-8 text-center cursor-pointer relative overflow-hidden"
+                <div className="rounded-2xl p-6 sm:p-8 text-center cursor-pointer relative overflow-hidden"
                   style={{ background: buildingFilter === "B"
                       ? "linear-gradient(135deg, rgba(232,184,75,0.30) 0%, rgba(232,184,75,0.12) 100%)"
                       : "linear-gradient(135deg, rgba(255,255,255,0.10) 0%, rgba(255,255,255,0.05) 100%)",
@@ -592,25 +646,25 @@ const Home = () => {
                     <div className="absolute inset-0 rounded-2xl pointer-events-none"
                       style={{ boxShadow: "inset 0 0 0 2px rgba(232,184,75,0.50)" }} />
                   )}
-                  <div className="w-16 h-16 rounded-2xl flex items-center justify-center mx-auto mb-5"
+                  <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-2xl flex items-center justify-center mx-auto mb-4 sm:mb-5"
                     style={{ background: buildingFilter === "B" ? "rgba(232,184,75,0.30)" : "rgba(232,184,75,0.15)",
                       border: `1.5px solid rgba(232,184,75,${buildingFilter === "B" ? "0.60" : "0.35"})` }}>
-                    <FiMapPin size={26} style={{ color: "#E8B84B" }} />
+                    <FiMapPin size={24} style={{ color: "#E8B84B" }} />
                   </div>
                   <div className="text-xs font-black uppercase tracking-widest mb-1" style={{ color: "rgba(232,184,75,0.70)", letterSpacing: "0.20em" }}>
                     {language === "am" ? "ሁለተኛ ህንፃ" : "ANNEX BUILDING"}
                   </div>
-                  <h3 className="text-2xl font-black text-white mb-2">
+                  <h3 className="text-xl sm:text-2xl font-black text-white mb-2">
                     {language === "am" ? "ህንፃ B" : "Building B"}
                   </h3>
-                  <div className="flex items-center justify-center gap-4 mb-6">
+                  <div className="flex items-center justify-center gap-4 mb-5 sm:mb-6">
                     <div className="flex flex-col items-center">
-                      <span className="text-xl font-black" style={{ color: "#E8B84B" }}>{blockBCount}</span>
+                      <span className="text-lg sm:text-xl font-black" style={{ color: "#E8B84B" }}>{blockBCount}</span>
                       <span className="text-xs" style={{ color: "rgba(255,255,255,0.50)" }}>{language === "am" ? "ቢሮዎች" : "Offices"}</span>
                     </div>
                     <div className="w-px h-8" style={{ background: "rgba(255,255,255,0.15)" }} />
                     <div className="flex flex-col items-center">
-                      <span className="text-xl font-black" style={{ color: "#E8B84B" }}>1</span>
+                      <span className="text-lg sm:text-xl font-black" style={{ color: "#E8B84B" }}>1</span>
                       <span className="text-xs" style={{ color: "rgba(255,255,255,0.50)" }}>{language === "am" ? "ፎቅ" : "Floor"}</span>
                     </div>
                   </div>
@@ -637,11 +691,11 @@ const Home = () => {
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: 20 }}
                   transition={{ duration: 0.4 }}
-                  className="mt-12"
+                  className="mt-10 sm:mt-12"
                 >
-                  <div className="flex items-center justify-between mb-6 flex-wrap gap-3">
+                  <div className="flex items-center justify-between mb-5 sm:mb-6 flex-wrap gap-3">
                     <div>
-                      <h3 className="text-xl font-black text-white">
+                      <h3 className="text-lg sm:text-xl font-black text-white">
                         {language === "am" ? `ህንፃ ${buildingFilter} ቢሮዎች` : `Building ${buildingFilter} Offices`}
                       </h3>
                       <p className="text-xs mt-1" style={{ color: "rgba(255,255,255,0.50)" }}>
@@ -668,7 +722,7 @@ const Home = () => {
                       return acc;
                     }, {});
                     return Object.entries(byFloor).map(([floor, depts]) => (
-                      <div key={floor} className="mb-8">
+                      <div key={floor} className="mb-7 sm:mb-8">
                         <div className="flex items-center gap-3 mb-4">
                           <div className="w-8 h-8 rounded-lg flex items-center justify-center text-xs font-black flex-shrink-0"
                             style={{ background: "#E8B84B", color: T.text }}>{floor}</div>
@@ -730,16 +784,16 @@ const Home = () => {
         {/* ══════════════════════════════════════════
             MOST VISITED DESKS
         ══════════════════════════════════════════ */}
-        <section id="desks-section" style={{ background: T.surface }} className="py-16">
+        <section id="desks-section" style={{ background: T.surface }} className="py-12 sm:py-16">
           <div className="max-w-6xl mx-auto px-4 sm:px-6">
             {/* Section header */}
-            <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-4 mb-8">
+            <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-4 mb-6 sm:mb-8">
               <div>
                 <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-bold uppercase mb-3"
                   style={{ background: `rgba(0,118,135,0.08)`, color: T.navy, border: `1px solid ${T.border}`, letterSpacing: "0.12em" }}>
                   <FiLayers size={11} /> {language === "am" ? "ዲፓርትመንቶች" : "DESKS & DEPARTMENTS"}
                 </div>
-                <h2 className="text-2xl md:text-3xl font-black" style={{ color: T.text }}>
+                <h2 className="text-xl sm:text-2xl md:text-3xl font-black" style={{ color: T.text }}>
                   {language === "am" ? "ብዙ ጊዜ የሚጎበኙ ጠረጴዛዎች" : "Most Visited Desks"}
                 </h2>
                 <p className="text-sm mt-1" style={{ color: T.textSub }}>
@@ -771,7 +825,7 @@ const Home = () => {
                 </div>
                 {/* Pagination */}
                 {deskPages > 1 && (
-                  <div className="flex items-center gap-2">
+                  <div className="hidden sm:flex items-center gap-2">
                     <button onClick={prevPage} disabled={deskPage === 0}
                       className="w-9 h-9 rounded-xl flex items-center justify-center transition-all disabled:opacity-30"
                       style={{ background: T.card, border: `1px solid ${T.border}`, color: T.navy, cursor: deskPage === 0 ? "not-allowed" : "pointer" }}>
@@ -793,7 +847,7 @@ const Home = () => {
 
             {/* Active filter indicator */}
             {buildingFilter && (
-              <div className="flex items-center gap-2 mb-4">
+              <div className="flex items-center gap-2 mb-4 flex-wrap">
                 <span className="text-xs font-semibold px-3 py-1.5 rounded-full flex items-center gap-1.5"
                   style={{ background: `rgba(0,118,135,0.10)`, color: T.navy, border: `1px solid ${T.border}` }}>
                   <FiMapPin size={11} />
@@ -811,7 +865,7 @@ const Home = () => {
 
             {/* Desk cards */}
             {loading ? (
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5">
                 {Array.from({ length: 4 }).map((_, i) => (
                   <div key={i} className="rounded-2xl overflow-hidden animate-pulse"
                     style={{ background: T.card, border: `1px solid ${T.border}`, height: 220 }}>
@@ -843,7 +897,7 @@ const Home = () => {
               </div>
             ) : (
               <>
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5" style={{ alignItems: "stretch" }}>
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5" style={{ alignItems: "stretch" }}>
                   {visibleDesks.map((dept, idx) => {
                     const deptName = dept.name?.[language] || dept.name?.en || dept.name || "";
                     const headName = dept.headName || dept.head?.name || dept.head || "";
@@ -960,32 +1014,32 @@ const Home = () => {
         {/* ══════════════════════════════════════════
             MINISTRY SECTORS GRID
         ══════════════════════════════════════════ */}
-        <section style={{ background: T.surface }} className="py-16">
+        <section style={{ background: T.surface }} className="py-12 sm:py-16">
           <div className="max-w-6xl mx-auto px-4 sm:px-6">
-            <div className="flex items-end justify-between mb-10">
+            <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-3 mb-8 sm:mb-10">
               <div>
                 <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-bold uppercase mb-3"
                   style={{ background: `rgba(0,118,135,0.08)`, color: T.navy, border: `1px solid ${T.border}`, letterSpacing: "0.10em" }}>
                   <FiGrid size={11} /> {t("browse_sector")}
                 </div>
-                <h2 className="text-2xl md:text-3xl font-black" style={{ color: T.text }}>{t("ministry_sectors")}</h2>
+                <h2 className="text-xl sm:text-2xl md:text-3xl font-black" style={{ color: T.text }}>{t("ministry_sectors")}</h2>
                 <p className="text-sm mt-1" style={{ color: T.textSub }}>{t("sectors_sub")}</p>
               </div>
-              <span className="hidden sm:block text-xs font-bold px-4 py-2 rounded-full uppercase"
+              <span className="text-xs font-bold px-4 py-2 rounded-full uppercase self-start sm:self-auto"
                 style={{ background: T.border, color: T.textSub, letterSpacing: "0.09em" }}>
                 {sectors.length} {sectors.length === 1 ? t("sector_count_one") : t("sector_count_many")}
               </span>
             </div>
 
-            <div className={`grid grid-cols-1 sm:grid-cols-2 gap-6 ${
+            <div className={`grid grid-cols-1 sm:grid-cols-2 gap-5 sm:gap-6 ${
               sectors.length === 3 ? "lg:grid-cols-3" :
               sectors.length === 2 ? "lg:grid-cols-2" :
               sectors.length >= 4 ? "xl:grid-cols-4" : ""}`}>
               {loading
                 ? Array.from({ length: 3 }).map((_, i) => (
                     <div key={i} className="rounded-2xl overflow-hidden animate-pulse"
-                      style={{ background: T.card, border: `1px solid ${T.border}`, height: 420 }}>
-                      <div style={{ height: 240, background: T.border }} />
+                      style={{ background: T.card, border: `1px solid ${T.border}`, height: 380 }}>
+                      <div style={{ height: 200, background: T.border }} />
                       <div className="p-6 flex flex-col gap-3">
                         <div style={{ height: 16, background: T.border, borderRadius: 6, width: "70%" }} />
                         <div style={{ height: 12, background: T.border, borderRadius: 6, width: "90%" }} />
@@ -999,10 +1053,10 @@ const Home = () => {
                         className="group flex flex-col rounded-2xl overflow-hidden w-full"
                         style={{ background: T.card, border: `1px solid ${T.border}`,
                           boxShadow: "0 2px 12px rgba(11,42,74,0.07)", transition: "box-shadow .25s, border-color .25s",
-                          textDecoration: "none", cursor: "pointer", display: "flex", minHeight: 440 }}
+                          textDecoration: "none", cursor: "pointer", display: "flex" }}
                         onMouseEnter={e => { e.currentTarget.style.boxShadow = "0 24px 56px rgba(11,42,74,0.18)"; e.currentTarget.style.borderColor = T.gold; }}
                         onMouseLeave={e => { e.currentTarget.style.boxShadow = "0 2px 12px rgba(11,42,74,0.07)"; e.currentTarget.style.borderColor = T.border; }}>
-                        <div className="relative overflow-hidden" style={{ height: 240 }}>
+                        <div className="relative overflow-hidden" style={{ height: 190 }}>
                           <img src={getSectorImage(sector)} alt={sectorName(sector)} loading="lazy"
                             className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
                           <div className="absolute inset-0"
@@ -1016,8 +1070,8 @@ const Home = () => {
                             {sector.departmentCount || 0} {t("depts_abbr")}
                           </span>
                         </div>
-                        <div className="p-6 flex flex-col flex-1">
-                          <h3 className="font-extrabold text-lg leading-snug mb-3" style={{ color: T.text }}>
+                        <div className="p-5 sm:p-6 flex flex-col flex-1">
+                          <h3 className="font-extrabold text-base sm:text-lg leading-snug mb-3" style={{ color: T.text }}>
                             {sectorName(sector)}
                           </h3>
                           <p className="text-sm font-medium leading-relaxed flex-1" style={{ color: T.textSub }}>
@@ -1035,12 +1089,12 @@ const Home = () => {
                               </div>
                             )}
                           </div>
-                          <div className="flex items-center justify-between mt-4 px-5 py-3.5 rounded-xl transition-all"
+                          <div className="flex items-center justify-between mt-4 px-4 sm:px-5 py-3 sm:py-3.5 rounded-xl transition-all"
                             style={{ background: "rgba(0,118,135,0.10)", border: `1px solid rgba(0,118,135,0.22)` }}>
-                            <span className="text-sm font-bold uppercase" style={{ color: T.navy, letterSpacing: "0.12em" }}>
+                            <span className="text-xs sm:text-sm font-bold uppercase" style={{ color: T.navy, letterSpacing: "0.12em" }}>
                               {t("view_details")}
                             </span>
-                            <div className="w-8 h-8 rounded-full flex items-center justify-center" style={{ background: T.navy }}>
+                            <div className="w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0" style={{ background: T.navy }}>
                               <FiArrowRight size={14} color="#fff" />
                             </div>
                           </div>
@@ -1055,23 +1109,23 @@ const Home = () => {
         {/* ══════════════════════════════════════════
             POPULAR SERVICES
         ══════════════════════════════════════════ */}
-        <section style={{ background: T.card }} className="py-16">
+        <section style={{ background: T.card }} className="py-12 sm:py-16">
           <div className="max-w-6xl mx-auto px-4 sm:px-6">
-            <div className="text-center mb-10">
+            <div className="text-center mb-8 sm:mb-10">
               <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-bold uppercase mb-3"
                 style={{ background: `rgba(0,118,135,0.08)`, color: T.navy, border: `1px solid ${T.border}`, letterSpacing: "0.12em" }}>
                 {language === "am" ? "አገልግሎቶች" : "SERVICES"}
               </div>
-              <h2 className="text-2xl md:text-3xl font-black mb-2" style={{ color: T.text }}>
+              <h2 className="text-xl sm:text-2xl md:text-3xl font-black mb-2" style={{ color: T.text }}>
                 {language === "am" ? "ታዋቂ የመንግስት አገልግሎቶች" : "Popular Government Services"}
               </h2>
-              <p className="text-sm" style={{ color: T.textSub }}>
+              <p className="text-sm px-2" style={{ color: T.textSub }}>
                 {language === "am"
                   ? "ዲጂታል አገልግሎቶች — ፈጣን፣ ግልጽ እና ለሁሉም ሰው ተደራሽ"
                   : "Digital-first public services designed to be fast, transparent, and accessible."}
               </p>
             </div>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5">
               {[
                 { icon:<FiGrid size={22}/>,     title:language==="am"?"ዲጂታል ምዝገባ":"Digital Registration",   desc:language==="am"?"ንግድ እና ስታርት አፕ ይመዝግቡ":"Register businesses, startups, and technology ventures through a single online portal." },
                 { icon:<FiStar size={22}/>,     title:language==="am"?"ስታርት አፕ ድጋፍ":"Startup Support",          desc:language==="am"?"ፈንድ፣ አማካሪ እና ኢንኩቤሽን":"Access funding, mentorship, and incubation programs for early-stage founders." },
@@ -1084,12 +1138,12 @@ const Home = () => {
                   initial={{ opacity:0, y:20 }} whileInView={{ opacity:1, y:0 }}
                   viewport={{ once:true }} transition={{ duration:0.35, delay:i*0.07 }}
                   whileHover={{ y:-4, transition:{ duration:0.18 } }}>
-                  <div className="p-6 rounded-2xl h-full group cursor-pointer"
+                  <div className="p-5 sm:p-6 rounded-2xl h-full group cursor-pointer"
                     style={{ background: T.surface, border:`1px solid ${T.border}`,
                       boxShadow:"0 1px 8px rgba(0,118,135,0.06)", transition:"all 0.2s" }}
                     onMouseEnter={e => { e.currentTarget.style.boxShadow="0 16px 40px rgba(0,118,135,0.14)"; e.currentTarget.style.borderColor=T.navy; }}
                     onMouseLeave={e => { e.currentTarget.style.boxShadow="0 1px 8px rgba(0,118,135,0.06)"; e.currentTarget.style.borderColor=T.border; }}>
-                    <div className="w-12 h-12 rounded-xl flex items-center justify-center mb-4"
+                    <div className="w-11 h-11 sm:w-12 sm:h-12 rounded-xl flex items-center justify-center mb-4"
                       style={{ background:`rgba(0,118,135,0.10)`, color:T.navy }}>
                       {svc.icon}
                     </div>
@@ -1108,19 +1162,19 @@ const Home = () => {
         {/* ══════════════════════════════════════════
             MINISTRY AT A GLANCE — Stats
         ══════════════════════════════════════════ */}
-        <section style={{ background: `linear-gradient(160deg, ${T.text} 0%, ${T.navy} 60%, ${T.navyLight} 100%)` }} className="py-20">
+        <section style={{ background: `linear-gradient(160deg, ${T.text} 0%, ${T.navy} 60%, ${T.navyLight} 100%)` }} className="py-14 sm:py-20">
           <div className="max-w-6xl mx-auto px-4 sm:px-6">
-            <div className="text-center mb-14">
-              <h2 className="text-2xl md:text-3xl font-black text-white mb-2">
+            <div className="text-center mb-10 sm:mb-14">
+              <h2 className="text-xl sm:text-2xl md:text-3xl font-black text-white mb-2">
                 {language === "am" ? "ሚኒስቴሩ በአንድ ሩጫ" : "The Ministry at a glance"}
               </h2>
-              <p className="text-sm" style={{ color: "rgba(255,255,255,0.55)" }}>
+              <p className="text-sm px-2" style={{ color: "rgba(255,255,255,0.55)" }}>
                 {language === "am"
                   ? "ለኢትዮጵያ የፈጠራ ሥነ-ምህዳር ዕለት ዕለት አገልግሎት"
                   : "Serving Ethiopia's innovation ecosystem every single day."}
               </p>
             </div>
-            <div className="grid grid-cols-2 md:grid-cols-5 gap-8 md:gap-6">
+            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-6 sm:gap-8 md:gap-6">
               <StatItem value={stats.totalDepts || 40}   suffix="+" label={language==="am"?"ዲፓርትመንቶች":"Departments"} />
               <StatItem value={500}                       suffix="+" label={language==="am"?"ሠራተኞች":"Staff Members"} />
               <StatItem value={6}                         suffix=""  label={language==="am"?"አገልግሎቶች":"Government Services"} />
@@ -1133,23 +1187,23 @@ const Home = () => {
         {/* ══════════════════════════════════════════
             CONTACT SECTION
         ══════════════════════════════════════════ */}
-        <section style={{ background: T.surface }} className="py-16">
+        <section style={{ background: T.surface }} className="py-12 sm:py-16">
           <div className="max-w-6xl mx-auto px-4 sm:px-6">
-            <div className="text-center mb-10">
+            <div className="text-center mb-8 sm:mb-10">
               <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-bold uppercase mb-3"
                 style={{ background:`rgba(0,118,135,0.08)`, color:T.navy, border:`1px solid ${T.border}`, letterSpacing:"0.12em" }}>
                 {language==="am"?"ያግኙን":"CONTACT"}
               </div>
-              <h2 className="text-2xl md:text-3xl font-black mb-2" style={{ color:T.text }}>
+              <h2 className="text-xl sm:text-2xl md:text-3xl font-black mb-2" style={{ color:T.text }}>
                 {language==="am"?"ሚኒስቴሩን ያግኙ":"Get in touch with the Ministry"}
               </h2>
-              <p className="text-sm" style={{ color:T.textSub }}>
+              <p className="text-sm px-2" style={{ color:T.textSub }}>
                 {language==="am"
                   ? "ትክክለኛ ቢሮ፣ ዲፓርትመንት ወይም አገልግሎት እንዲያገኙ እናግዝዎታለን"
                   : "We are here to help you find the right office, department, or service."}
               </p>
             </div>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5">
               {[
                 {
                   icon: <FiMapPin size={22} />,
@@ -1179,9 +1233,9 @@ const Home = () => {
                 <motion.div key={i}
                   initial={{ opacity:0, y:20 }} whileInView={{ opacity:1, y:0 }}
                   viewport={{ once:true }} transition={{ duration:0.35, delay:i*0.08 }}>
-                  <div className="p-6 rounded-2xl h-full"
+                  <div className="p-5 sm:p-6 rounded-2xl h-full"
                     style={{ background:T.card, border:`1px solid ${T.border}`, boxShadow:"0 1px 8px rgba(0,118,135,0.06)" }}>
-                    <div className="w-12 h-12 rounded-xl flex items-center justify-center mb-4"
+                    <div className="w-11 h-11 sm:w-12 sm:h-12 rounded-xl flex items-center justify-center mb-4"
                       style={{ background:`rgba(0,118,135,0.10)`, color:T.navy }}>
                       {item.icon}
                     </div>
@@ -1204,9 +1258,9 @@ const Home = () => {
             </div>
 
             {/* CTA */}
-            <div className="text-center mt-10">
+            <div className="text-center mt-8 sm:mt-10">
               <a href="mailto:contact@mint.gov.et"
-                className="inline-flex items-center gap-2.5 px-8 py-4 rounded-2xl font-bold text-sm text-white"
+                className="inline-flex items-center gap-2.5 px-6 sm:px-8 py-3.5 sm:py-4 rounded-2xl font-bold text-sm text-white"
                 style={{ background:`linear-gradient(90deg, ${T.navy}, ${T.navyLight})`,
                   textDecoration:"none", boxShadow:`0 8px 24px rgba(0,118,135,0.35)` }}>
                 <FiMail size={16} />
